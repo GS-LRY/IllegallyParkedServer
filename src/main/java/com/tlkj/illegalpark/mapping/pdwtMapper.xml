@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sy.dao.pdwtMapper" >
+  <resultMap id="BaseResultMap" type="sy.model.pdwt" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="authId" property="authid" jdbcType="VARCHAR" />
+    <result column="platformIp" property="platformip" jdbcType="VARCHAR" />
+    <result column="deviceAccessId" property="deviceaccessid" jdbcType="VARCHAR" />
+    <result column="ballMachineMainIp" property="ballmachinemainip" jdbcType="VARCHAR" />
+    <result column="subnetMask" property="subnetmask" jdbcType="VARCHAR" />
+    <result column="gateWay" property="gateway" jdbcType="VARCHAR" />
+    <result column="entryNumber" property="entrynumber" jdbcType="VARCHAR" />
+    <result column="publicLocus" property="publiclocus" jdbcType="VARCHAR" />
+    <result column="installLocation" property="installlocation" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="VARCHAR" />
+    <result column="accessWay" property="accessway" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="pac" property="pac" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, authId, platformIp, deviceAccessId, ballMachineMainIp, subnetMask, gateWay, entryNumber, 
+    publicLocus, installLocation, lat, lng, accessWay, note, pac
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pdwt
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pdwt
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="sy.model.pdwt" >
+    insert into pdwt (Id, authId, platformIp, 
+      deviceAccessId, ballMachineMainIp, subnetMask, 
+      gateWay, entryNumber, publicLocus, 
+      installLocation, lat, lng, 
+      accessWay, note, pac
+      )
+    values (#{id,jdbcType=INTEGER}, #{authid,jdbcType=VARCHAR}, #{platformip,jdbcType=VARCHAR}, 
+      #{deviceaccessid,jdbcType=VARCHAR}, #{ballmachinemainip,jdbcType=VARCHAR}, #{subnetmask,jdbcType=VARCHAR}, 
+      #{gateway,jdbcType=VARCHAR}, #{entrynumber,jdbcType=VARCHAR}, #{publiclocus,jdbcType=VARCHAR}, 
+      #{installlocation,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, 
+      #{accessway,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{pac,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="sy.model.pdwt" >
+    insert into pdwt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="authid != null" >
+        authId,
+      </if>
+      <if test="platformip != null" >
+        platformIp,
+      </if>
+      <if test="deviceaccessid != null" >
+        deviceAccessId,
+      </if>
+      <if test="ballmachinemainip != null" >
+        ballMachineMainIp,
+      </if>
+      <if test="subnetmask != null" >
+        subnetMask,
+      </if>
+      <if test="gateway != null" >
+        gateWay,
+      </if>
+      <if test="entrynumber != null" >
+        entryNumber,
+      </if>
+      <if test="publiclocus != null" >
+        publicLocus,
+      </if>
+      <if test="installlocation != null" >
+        installLocation,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="accessway != null" >
+        accessWay,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="pac != null" >
+        pac,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="authid != null" >
+        #{authid,jdbcType=VARCHAR},
+      </if>
+      <if test="platformip != null" >
+        #{platformip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceaccessid != null" >
+        #{deviceaccessid,jdbcType=VARCHAR},
+      </if>
+      <if test="ballmachinemainip != null" >
+        #{ballmachinemainip,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateway != null" >
+        #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="entrynumber != null" >
+        #{entrynumber,jdbcType=VARCHAR},
+      </if>
+      <if test="publiclocus != null" >
+        #{publiclocus,jdbcType=VARCHAR},
+      </if>
+      <if test="installlocation != null" >
+        #{installlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="accessway != null" >
+        #{accessway,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="pac != null" >
+        #{pac,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="sy.model.pdwt" >
+    update pdwt
+    <set >
+      <if test="authid != null" >
+        authId = #{authid,jdbcType=VARCHAR},
+      </if>
+      <if test="platformip != null" >
+        platformIp = #{platformip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceaccessid != null" >
+        deviceAccessId = #{deviceaccessid,jdbcType=VARCHAR},
+      </if>
+      <if test="ballmachinemainip != null" >
+        ballMachineMainIp = #{ballmachinemainip,jdbcType=VARCHAR},
+      </if>
+      <if test="subnetmask != null" >
+        subnetMask = #{subnetmask,jdbcType=VARCHAR},
+      </if>
+      <if test="gateway != null" >
+        gateWay = #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="entrynumber != null" >
+        entryNumber = #{entrynumber,jdbcType=VARCHAR},
+      </if>
+      <if test="publiclocus != null" >
+        publicLocus = #{publiclocus,jdbcType=VARCHAR},
+      </if>
+      <if test="installlocation != null" >
+        installLocation = #{installlocation,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=VARCHAR},
+      </if>
+      <if test="accessway != null" >
+        accessWay = #{accessway,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="pac != null" >
+        pac = #{pac,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="sy.model.pdwt" >
+    update pdwt
+    set authId = #{authid,jdbcType=VARCHAR},
+      platformIp = #{platformip,jdbcType=VARCHAR},
+      deviceAccessId = #{deviceaccessid,jdbcType=VARCHAR},
+      ballMachineMainIp = #{ballmachinemainip,jdbcType=VARCHAR},
+      subnetMask = #{subnetmask,jdbcType=VARCHAR},
+      gateWay = #{gateway,jdbcType=VARCHAR},
+      entryNumber = #{entrynumber,jdbcType=VARCHAR},
+      publicLocus = #{publiclocus,jdbcType=VARCHAR},
+      installLocation = #{installlocation,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=VARCHAR},
+      accessWay = #{accessway,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      pac = #{pac,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
