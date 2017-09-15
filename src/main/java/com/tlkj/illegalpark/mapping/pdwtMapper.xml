@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="sy.dao.pdwtMapper" >
-  <resultMap id="BaseResultMap" type="sy.model.pdwt" >
+<mapper namespace="com.tlkj.illegalpark.dao.pdwtMapper" >
+  <resultMap id="BaseResultMap" type="com.tlkj.illegalpark.entity.pdwt" >
     <id column="Id" property="id" jdbcType="INTEGER" />
     <result column="authId" property="authid" jdbcType="VARCHAR" />
     <result column="platformIp" property="platformip" jdbcType="VARCHAR" />
@@ -28,11 +28,14 @@
     from pdwt
     where Id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="getAllpdwtInformation" resultMap="BaseResultMap">
+  	select * from pdwt
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from pdwt
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="sy.model.pdwt" >
+  <insert id="insert" parameterType="com.tlkj.illegalpark.entity.pdwt" >
     insert into pdwt (Id, authId, platformIp, 
       deviceAccessId, ballMachineMainIp, subnetMask, 
       gateWay, entryNumber, publicLocus, 
@@ -46,7 +49,7 @@
       #{accessway,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{pac,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="sy.model.pdwt" >
+  <insert id="insertSelective" parameterType="com.tlkj.illegalpark.entity.pdwt" >
     insert into pdwt
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -143,7 +146,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="sy.model.pdwt" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.tlkj.illegalpark.entity.pdwt" >
     update pdwt
     <set >
       <if test="authid != null" >
@@ -191,7 +194,7 @@
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="sy.model.pdwt" >
+  <update id="updateByPrimaryKey" parameterType="com.tlkj.illegalpark.entity.pdwt" >
     update pdwt
     set authId = #{authid,jdbcType=VARCHAR},
       platformIp = #{platformip,jdbcType=VARCHAR},

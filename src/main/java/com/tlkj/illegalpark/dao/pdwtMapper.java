@@ -1,7 +1,11 @@
 package com.tlkj.illegalpark.dao;
 
-import com.tlkj.illegalpark.entity.*;
+import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.tlkj.illegalpark.entity.*;
+@Repository
 public interface pdwtMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +18,6 @@ public interface pdwtMapper {
     int updateByPrimaryKeySelective(pdwt record);
 
     int updateByPrimaryKey(pdwt record);
+    
+    List<pdwt> getAllpdwtInformation();
 }

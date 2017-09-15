@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+body, html, #showmap {
+	height: 100%;
+	margin: 0px
+}
+
+.row {
+	height: 100%;
+}
+
+#cameradiv {
+	width: 20%;
+	position: fixed;
+	left: 25px;
+	top: 60px;
+	height: 100%;
+	padding-bottom: 80px;
+	z-index: 100;
+}
+
+.well.sidebar-nav {
+	position: relative;
+	height: 100%;
+}
+
+.tab-content {
+	height: 100%;
+	padding-bottom: 42px;
+}
+
+.tab-pane {
+	height: 100%;
+	overflow: auto;
+}
+.toggle_left,
+.toggle_right{
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -40px;
+	width: 38px;
+	height: 74px;
+	cursor: pointer;
+	z-index: 2;
+}
+.toggle_left{
+	background:url('../img/left_arrow.png');
+}
+.toggle_right{
+	right: -40px;
+	background:url('../img/right_arrow.png');
+}
+.info {
+	border: solid 1px silver;
+}
+
+div.info-top {
+	position: relative;
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-bottom: 1px solid #CCC;
+	border-radius: 5px 5px 0 0;
+}
+
+div.info-top div {
+	display: inline-block;
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 31px;
+	padding: 0 10px;
+}
+
+div.info-top img {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	transition-duration: 0.25s;
+}
+
+div.info-top img:hover {
+	box-shadow: 0px 0px 5px #000;
+}
+
+div.info-middle {
+	font-size: 12px;
+	padding: 6px;
+	line-height: 20px;
+}
+
+div.info-bottom {
+	height: 0px;
+	width: 100%;
+	clear: both;
+	text-align: center;
+}
+
+div.info-bottom img {
+	position: relative;
+	z-index: 104;
+}
+
+span {
+	margin-left: 5px;
+	font-size: 11px;
+}
+
+.info-middle img {
+	float: left;
+	margin-right: 6px;
+}
