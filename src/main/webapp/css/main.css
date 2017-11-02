@@ -33,8 +33,8 @@ body, html, #showmap {
 	height: 100%;
 	overflow: auto;
 }
-.toggle_left,
-.toggle_right{
+
+.toggle_left, .toggle_right {
 	display: block;
 	position: absolute;
 	right: 0;
@@ -45,13 +45,16 @@ body, html, #showmap {
 	cursor: pointer;
 	z-index: 2;
 }
-.toggle_left{
-	background:url('../img/left_arrow.png');
+
+.toggle_left {
+	background: url('../img/left_arrow.png');
 }
-.toggle_right{
+
+.toggle_right {
 	right: -40px;
-	background:url('../img/right_arrow.png');
+	background: url('../img/right_arrow.png');
 }
+
 .info {
 	border: solid 1px silver;
 }
@@ -109,4 +112,48 @@ span {
 .info-middle img {
 	float: left;
 	margin-right: 6px;
+}
+
+#panel {
+	position: absolute;
+	background-color: white;
+	max-height: 90%;
+	overflow-y: auto;
+	top: 118px;
+	right: 10px;
+	width: 280px;
+}
+#myPageTop {
+	position: absolute;
+	top: 43px;
+	right: 13px;
+	background: #fff none repeat scroll 0 0;
+	border: 1px solid #ccc;
+	margin: 10px auto;
+	padding:6px;
+	font-family: "Microsoft Yahei", "微软雅黑", "Pinghei";
+	font-size: 14px;
+}
+#myPageTop label {
+	margin: 0 20px 0 0;
+	color: #666666;
+	font-weight: normal;
+}
+#myPageTop input {
+	width: 170px;
+}
+#myPageTop .column2{
+	padding-left: 25px;
+}
+.form-inline {
+	margin-top: 15px;
+}
+.form-group {
+	width: 100%;
+}
+#keywords {
+	width: 80%;
+}
+.search-result {
+	margin-top:10px;
 }

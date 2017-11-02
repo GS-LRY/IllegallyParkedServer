@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>IllegallyParkedServer</groupId>
-  <artifactId>IllegallyParkedServer</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>IllegallyParkedServer Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  
-  <properties>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>IllegallyParkedServer</groupId>
+	<artifactId>IllegallyParkedServer</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>IllegallyParkedServer Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
 		<!-- spring版本号 -->
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
@@ -17,8 +17,8 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 	</properties>
-  <dependencies>
-    <!-- spring核心包 -->
+	<dependencies>
+		<!-- spring核心包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -149,8 +149,18 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-  </dependencies>
-  <build>
-    <finalName>IllegallyParkedServer</finalName>
-  </build>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>IllegallyParkedServer</finalName>
+	</build>
 </project>

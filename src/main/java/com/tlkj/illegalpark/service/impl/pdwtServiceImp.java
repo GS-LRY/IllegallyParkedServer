@@ -33,4 +33,9 @@ public class pdwtServiceImp implements pdwtService {
 		return pdwtMapper.getAllpdwtInformation();
 	}
 
+	@Override
+	public List<pdwt> searchpdwtInformation(String entryNumber, String installLocation, String deviceAccessId) {
+		return pdwtMapper.searchpdwtInformation(entryNumber, installLocation, deviceAccessId);
+	}
+
 }

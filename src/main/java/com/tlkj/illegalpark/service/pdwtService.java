@@ -10,4 +10,5 @@ import com.tlkj.illegalpark.entity.pdwt;
 public interface pdwtService {
 	pdwt selectByPrimaryKey(Integer id);
 	List<pdwt> getAllpdwtInformation();
+	List<pdwt> searchpdwtInformation(String entryNumber,String installLocation,String deviceAccessId);
 }

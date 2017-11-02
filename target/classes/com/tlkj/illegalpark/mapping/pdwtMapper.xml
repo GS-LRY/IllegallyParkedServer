@@ -31,6 +31,9 @@
   <select id="getAllpdwtInformation" resultMap="BaseResultMap">
   	select * from pdwt
   </select>
+  <select id="searchpdwtInformation" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from pdwt where entryNumber = #{entryNumber,jdbcType=VARCHAR} or installLocation like #{installLocation,jdbcType=VARCHAR} or deviceAccessId = #{deviceAccessId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from pdwt
     where Id = #{id,jdbcType=INTEGER}

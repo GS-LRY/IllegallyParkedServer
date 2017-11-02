@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport"
+	content="initial-scale=1.0, user-scalable=no, width=device-width">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+<link href="css/zTreeStyle/zTreeStyle.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./index.css">
+<title>主页</title>
+</head>
+<body>
+	<!-- S= 导航栏 -->
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar"></button>
+				<a class="navbar-brand" href="#">TLKJ.COM</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">操作地图</a></li>
+					<li><a href="#">系统运维</a></li>
+					<li><a href="#">系统管理</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+	</div>
+	<!-- E= 导航栏 -->
+	<!-- S= 探头列表 -->
+	<div class="row" id="cameradiv">
+		<span id='toggle' class="toggle_left"></span>
+		<div class="well sidebar-nav">
+			<!-- S = 标签页 -->
+			<ul id="myTabs" class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a href="#weiting"
+					id="weiting-tab" role="tab" data-toggle="tab"
+					aria-controls="weiting" aria-expanded="true">违停</a></li>
+				<li role="presentation"><a href="#kakou" id="kakou-tab"
+					role="tab" data-toggle="tab" aria-controls="kakou"
+					aria-expanded="false">卡口</a></li>
+				<li role="presentation"><a href="#gaosu" id="gaosu-tab"
+					role="tab" data-toggle="tab" aria-controls="gaosu"
+					aria-expanded="false">高速</a></li>
+				<li role="presentation"><a href="#guzhang" id="guzhang-tab"
+					role="tab" data-toggle="tab" aria-controls="guzhang"
+					aria-expanded="false">故障设备</a></li>
+				<li role="presentation" class="active"><a href="#sousuo" id="sousuo-tab"
+					role="tab" data-toggle="tab" aria-controls="sousuo"
+					aria-expanded="false">搜索</a></li>
+			</ul>
+			<!-- E = 标签页 -->
+			<!-- S = 标签页内容 -->
+			<div id="myTabContent" class="tab-content">
+				<!-- S = 违停 -->
+				<div role="tabpanel" class="tab-pane fade" id="weiting"
+					aria-labelledby="weiting-tab">
+					<ul id="weiting-tree" class="ztree"></ul>
+				</div>
+				<!-- E = 违停 -->
+				<!-- S = 卡口 -->
+				<div role="tabpanel" class="tab-pane fade" id="kakou"
+					aria-labelledby="kakou-tab">
+					<ul class="nav nav-list">
+						<li><a href="#">HTML 4.01</a></li>
+						<li><a href="#">HTML5</a></li>
+						<li><a href="#">CSS</a></li>
+						<li><a href="#">JavaScript</a></li>
+						<li><a href="#">Twitter Bootstrap</a></li>
+						<li><a href="#">Firebug</a></li>
+						<li><a href="#">Backend</a></li>
+						<li><a href="#">PHP</a></li>
+						<li><a href="#">SQL</a></li>
+						<li><a href="#">MySQL</a></li>
+						<li><a href="#">PostgreSQL</a></li>
+						<li><a href="#">MongoDB</a></li>
+						<li><a href="#">JavaScript</a></li>
+					</ul>
+				</div>
+				<!-- E = 卡口 -->
+				<!-- S = 高速 -->
+				<div role="tabpanel" class="tab-pane fade" id="gaosu"
+					aria-labelledby="gaosu-tab"></div>
+				<!-- E = 高速 -->
+				<!-- S = 故障 -->
+				<div role="tabpanel" class="tab-pane fade" id="guzhang"
+					aria-labelledby="guzhang-tab"></div>
+				<!-- E = 故障 -->
+				<!-- S = 搜索 -->
+				<div role="tabpanel" class="tab-pane fade active in" id="sousuo"
+					aria-labelledby="sousuo-tab">
+					<form class="form-inline" onsubmit="return false">
+						<div class="form-group">
+							<input type="text" class="form-control" id="keywords"
+								placeholder="请输入设备编号、安装地址、坐标">
+							<button id="searchButton" type="button" class="btn btn-primary">搜索</button>
+						</div>
+					</form>
+					<div class="panel panel-default search-result">
+						<div class="panel-heading">查询结果</div>
+						<div class="panel-body"><ul id="my-list"></ul></div>
+					</div>
+				</div>
+				<!-- E = 搜索 -->
+			</div>
+			<!-- E = 标签页内容 -->
+
+		</div>
+		<!--/.well -->
+	</div>
+	<!--/span-->
+
+	<!-- E= 探头列表 -->
+	<!-- S= 地图操作 -->
+
+
+	<div id="showmap" tabindex="0"></div>
+
+	<!-- E= 地图操作 -->
+
+	<!-- S= 搜索 -->
+
+
+	<!-- E= 搜索 -->
+	<script type="text/javascript"
+		src="https://webapi.amap.com/maps?v=1.4.0&key=872207cd7707fe014db211e620eb0e06"></script>
+
+	<script type="text/javascript"
+		src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ztree.core.min.js"></script>
+	 <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+	<script type="text/javascript">
+		// 地图显示
+		var map = new AMap.Map('showmap', {
+			resizeEnable : true,
+			zoom : 10,
+			center : [ 121.47, 31.23 ]
+		});
+		
+		// 探头显示
+		var setting = {
+			data : {
+				simpleData : {
+					enable : true
+				}
+			}
+		};
+		var infoWindow;
+		var Lnglats = [];//存储点的坐标
+		var jsondatas = [];
+		$(document).ready(
+				function() {
+					$.ajax({
+						type : 'GET',
+						url : 'getAllpdwtInformation.json',
+						dataType : 'json',
+						success : function(data) {
+							//var Lnglats = [];//存储点的坐标
+							var Lnglatss = [];
+							var treeList = new Array();
+							var pdwtList = eval(data.pdwtList);
+							var maxpac = data.maxpac;
+							// 筛选出包数
+							var pacList = eval(data.pacList);
+							
+							for (i = 0; i < pacList.length; i++){
+								treeList[i] = new Object();
+								treeList[i].id = pacList[i];
+								treeList[i].pId = pacList[i];
+								treeList[i].name = pacList[i]+"包";
+								treeList[i].icon = "img/fenlei.png";
+							}
+							infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+							for (i = 0; i < pdwtList.length; i++) {
+								treeList[i+pacList.length] = new Object();
+								treeList[i+pacList.length].id = maxpac+pdwtList[i].id;
+								treeList[i+pacList.length].pId = pdwtList[i].pac;
+								treeList[i+pacList.length].name = pdwtList[i].deviceaccessid;
+								treeList[i+pacList.length].icon = "img/pingsuccess.png";
+								
+								// GPS坐标转换为高德坐标
+								Lnglats[i] = [pdwtList[i].lng,pdwtList[i].lat];
+								//alert("转换前："+Lnglats[i]);
+								var gdgps = GPS.gcj_encrypt(Number(pdwtList[i].lat),Number(pdwtList[i].lng));
+								var slng = gdgps.lon;
+								var slat = gdgps.lat;
+								Lnglats[i] = [slng,slat];
+								//alert("转换后："+Lnglats[i]);
+								
+								
+							}
+		 
+							var zNodes = treeList;
+							$.fn.zTree.init($("#weiting-tree"), setting, zNodes);
+							
+							$('#toggle').on('click',function(){
+								var className = $(this).prop('class');
+								switch(className){
+									case 'toggle_left':
+										$('#cameradiv').animate({width:'0'});
+										$('.well').animate({padding:'0'}).css('border','none');
+
+										$('#myTabs').hide();
+										$(this).prop('class','toggle_right');
+										break;
+									case 'toggle_right':
+										$('#cameradiv').animate({width:'20%'});
+										$('.well').animate({padding:'20px'}).css('border','1px solid #e3e3e3');
+										$('#myTabs').show();
+										$(this).prop('class','toggle_left');
+										break;
+								};
+							});
+							
+							// 在地图上显示点标记
+							infoWindow = new AMap.InfoWindow({offset: new AMap.Pixel(0, -30)});
+						    for (var i = 0; i < Lnglats.length; i++) {
+						        var marker = new AMap.Marker({
+						            position: Lnglats[i],
+						            map: map,
+						            icon:new AMap.Icon({
+						            	size:new AMap.Size(40,50),//图标大小
+						            	image:"img/"+pdwtList[i].pac+"lnglat.png",// 包名+lnglat图片
+						            	imageOffset:new AMap.Pixel(0,0)
+						            })
+						        });
+						        marker.content = '第' + pdwtList[i].pac + '包<br/>设备接入ID：'+pdwtList[i].deviceaccessid+'<br/>设备编号：'+pdwtList[i].entrynumber+'<br/>安装地址：'+pdwtList[i].installlocation;
+						        marker.on('click', markerClick);
+						        marker.emit('click', {target: marker});
+						    }
+						    function markerClick(e) {
+						        infoWindow.setContent(e.target.content);
+						        infoWindow.open(map, e.target.getPosition());
+						    }
+						    map.setFitView();
+						    
+						    
+						},
+						error : function(XMLHttpRequest,
+								textStatus, errorThrown) {
+						}
+					});
+				});
+		// 搜索+分页
+		
+		AMapUI.loadUI(['misc/MarkerList', 'overlay/SimpleMarker', 'overlay/SimpleInfoWindow'],
+						            function(MarkerList, SimpleMarker, SimpleInfoWindow) {
+
+						                //即jQuery/Zepto
+						                var $ = MarkerList.utils.$;
+
+						                var defaultIconStyle = 'red', //默认的图标样式
+						                    hoverIconStyle = 'green', //鼠标hover时的样式
+						                    selectedIconStyle = 'purple' //选中时的图标样式
+						                ;
+
+						                var markerList = new MarkerList({
+						                    map: map,
+						                    //ListElement对应的父节点或者ID
+						                    listContainer: "my-list", //document.getElementById("myList"),
+						                    //选中后显示
+
+						                    //从数据中读取位置, 返回lngLat
+						                    getPosition: function(item) {
+						                        return [item.longitude, item.latitude];
+						                    },
+						                    //数据ID，如果不提供，默认使用数组索引，即index
+						                    getDataId: function(item, index) {
+
+						                        return item.id;
+						                    },
+						                    getInfoWindow: function(data, context, recycledInfoWindow) {
+
+						                        if (recycledInfoWindow) {
+
+						                            recycledInfoWindow.setInfoTitle(data.name);
+						                            recycledInfoWindow.setInfoBody(data.address);
+
+						                            return recycledInfoWindow;
+						                        }
+
+						                        return new SimpleInfoWindow({
+						                            infoTitle: data.name,
+						                            infoBody: data.address,
+						                            offset: new AMap.Pixel(0, -37)
+						                        });
+						                    },
+						                    //构造marker用的options对象, content和title支持模板，也可以是函数，返回marker实例，或者返回options对象
+						                    getMarker: function(data, context, recycledMarker) {
+
+						                        var label = String.fromCharCode('A'.charCodeAt(0) + context.index);
+
+						                        if (recycledMarker) {
+						                            recycledMarker.setIconLabel(label);
+						                            return;
+						                        }
+
+						                        return new SimpleMarker({
+						                            containerClassNames: 'my-marker',
+						                            iconStyle: defaultIconStyle,
+						                            iconLabel: label
+						                        });
+						                    },
+						                    //构造列表元素，与getMarker类似，可以是函数，返回一个dom元素，或者模板 html string
+						                    getListElement: function(data, context, recycledListElement) {
+
+						                        var label = String.fromCharCode('A'.charCodeAt(0) + context.index);
+
+						                        //使用模板创建
+						                        var innerHTML = MarkerList.utils.template(
+						                            '<div>' +
+						                            '    <h4>' +
+						                            '        <%- label %>. <%- data.name %>' +
+						                            '    </h4>' +
+						                            '    <div>' +
+						                            '        <p>安装地址：<%- data.address %></p>' +
+						                            '        <p>纬度：<%- data.latitude %></p>' +
+						                            '        <p>经度：<%- data.longitude %></p>' +
+						                            '    </div>' +
+						                            '</div>' +
+						                            '<div class="clear"></div>', {
+						                                data: data,
+						                                label: label
+						                            });
+
+						                        if (recycledListElement) {
+						                            recycledListElement.innerHTML = innerHTML;
+						                            return recycledListElement;
+						                        }
+
+						                        return '<li class="poibox">' +
+						                            innerHTML +
+						                            '</li>';
+						                    },
+						                    //列表节点上监听的事件
+						                    listElementEvents: ['click', 'mouseenter', 'mouseleave'],
+						                    //marker上监听的事件
+						                    markerEvents: ['click', 'mouseover', 'mouseout'],
+						                    //makeSelectedEvents:false,
+						                    selectedClassNames: 'selected',
+						                    autoSetFitView: true
+						                });
+
+						                window.markerList = markerList;
+
+						                markerList.on('selectedChanged', function(event, info) {
+
+						                    checkBtnStats();
+
+						                    if (info.selected) {
+
+						                        console.log(info);
+
+						                        if (info.selected.marker) {
+						                            //更新为选中样式
+						                            info.selected.marker.setIconStyle(selectedIconStyle);
+						                        }
+
+						                        //选中并非由列表节点上的事件触发，将关联的列表节点移动到视野内
+						                        if (!info.sourceEventInfo.isListElementEvent) {
+
+						                            if (info.selected.listElement) {
+						                                scrollListElementIntoView($(info.selected.listElement));
+						                            }
+						                        }
+						                    }
+
+						                    if (info.unSelected && info.unSelected.marker) {
+						                        //更新为默认样式
+						                        info.unSelected.marker.setIconStyle(defaultIconStyle);
+						                    }
+						                });
+
+						                markerList.on('listElementMouseenter markerMouseover', function(event, record) {
+
+						                    if (record && record.marker) {
+
+						                        forcusMarker(record.marker);
+
+						                        //this.openInfoWindowOnRecord(record);
+
+						                        //非选中的id
+						                        if (!this.isSelectedDataId(record.id)) {
+						                            //设置为hover样式
+						                            record.marker.setIconStyle(hoverIconStyle);
+						                            //this.closeInfoWindow();
+						                        }
+						                    }
+						                });
+
+						                markerList.on('listElementMouseleave markerMouseout', function(event, record) {
+
+						                    if (record && record.marker) {
+
+						                        if (!this.isSelectedDataId(record.id)) {
+						                            //恢复默认样式
+						                            record.marker.setIconStyle(defaultIconStyle);
+						                        }
+						                    }
+						                });
+
+						                //数据输出完成
+						                markerList.on('renderComplete', function(event, records) {
+
+						                    checkBtnStats();
+						                });
+
+						                // markerList.on('*', function(type, event, res) {
+						                //     console.log(type, event, res);
+						                // });
+
+						                //加载数据
+						                function loadData(src, callback) {
+
+						                    $.getJSON(src, function(data) {
+
+						                        markerList._dataSrc = src;
+
+						                        //渲染数据
+						                        markerList.render(data);
+
+						                        if (callback) {
+						                            callback(null, data);
+						                        }
+						                    });
+						                }
+
+						                
+						                $('#searchButton').on('click',function(){
+						        			var serachParams = $("#keywords").val(); 
+						        			if(serachParams==''){
+						        				alert("请输入查询条件");
+						        			}else{
+						        				loadData("//localhost:8080/IllegallyParkedServer/getAllSearchInformation.json?keywords="+serachParams);
+						        			}
+						        		});
+						                
+						                // 输入内容后，按Enter键，响应事件
+						                $('#keywords').bind('keypress',function(event){
+						        			if(event.keyCode == 13){
+						        				var serachParams = $("#keywords").val(); 
+							        			if(serachParams==''){
+							        				alert("请输入查询条件");
+							        			}else{
+							        				loadData("//localhost:8080/IllegallyParkedServer/getAllSearchInformation.json?keywords="+serachParams);
+							        			}
+						        			}
+						        		});
+
+						                function forcusMarker(marker) {
+						                    marker.setTop(true);
+
+						                    //不在地图视野内
+						                    if (!(map.getBounds().contains(marker.getPosition()))) {
+
+						                        //移动到中心
+						                        map.setCenter(marker.getPosition());
+						                    }
+						                }
+
+						                function isElementInViewport(el) {
+						                    var rect = el.getBoundingClientRect();
+
+						                    return (
+						                        rect.top >= 0 &&
+						                        rect.left >= 0 &&
+						                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+						                        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+						                    );
+						                }
+
+						                function scrollListElementIntoView($listEle) {
+
+						                    if (!isElementInViewport($listEle.get(0))) {
+						                        $('#panel').scrollTop($listEle.offset().top - $listEle.parent().offset().top);
+						                    }
+
+						                    //闪动一下
+						                    $listEle
+						                        .one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+						                            function(e) {
+						                                $(this).removeClass('flash animated');
+						                            }).addClass('flash animated');
+						                }
+
+
+						            });
+		
+		// GPS转高德坐标方法
+		var GPS = {
+			    PI : 3.14159265358979324,
+			    x_pi : 3.14159265358979324 * 3000.0 / 180.0,
+			    delta : function (lat, lon) {
+			        // Krasovsky 1940
+			        //
+			        // a = 6378245.0, 1/f = 298.3
+			        // b = a * (1 - f)
+			        // ee = (a^2 - b^2) / a^2;
+			        var a = 6378245.0; //  a: 卫星椭球坐标投影到平面地图坐标系的投影因子。
+			        var ee = 0.00669342162296594323; //  ee: 椭球的偏心率。
+			        var dLat = this.transformLat(lon - 105.0, lat - 35.0);
+			        var dLon = this.transformLon(lon - 105.0, lat - 35.0);
+			        var radLat = lat / 180.0 * this.PI;
+			        var magic = Math.sin(radLat);
+			        magic = 1 - ee * magic * magic;
+			        var sqrtMagic = Math.sqrt(magic);
+			        dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * this.PI);
+			        dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * this.PI);
+			        return {'lat': dLat, 'lon': dLon};
+			    },
+
+			    //GPS---高德
+			    gcj_encrypt : function ( wgsLat , wgsLon ) {
+			        if (this.outOfChina(wgsLat, wgsLon))
+			            return {'lat': wgsLat, 'lon': wgsLon};
+
+			        var d = this.delta(wgsLat, wgsLon);
+			        return {'lat' : wgsLat + d.lat,'lon' : wgsLon + d.lon};
+			    },
+			    outOfChina : function (lat, lon) {
+			        if (lon < 72.004 || lon > 137.8347)
+			            return true;
+			        if (lat < 0.8293 || lat > 55.8271)
+			            return true;
+			        return false;
+			    },
+			    transformLat : function (x, y) {
+			        var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+			        ret += (20.0 * Math.sin(6.0 * x * this.PI) + 20.0 * Math.sin(2.0 * x * this.PI)) * 2.0 / 3.0;
+			        ret += (20.0 * Math.sin(y * this.PI) + 40.0 * Math.sin(y / 3.0 * this.PI)) * 2.0 / 3.0;
+			        ret += (160.0 * Math.sin(y / 12.0 * this.PI) + 320 * Math.sin(y * this.PI / 30.0)) * 2.0 / 3.0;
+			        return ret;
+			    },
+			    transformLon : function (x, y) {
+			        var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+			        ret += (20.0 * Math.sin(6.0 * x * this.PI) + 20.0 * Math.sin(2.0 * x * this.PI)) * 2.0 / 3.0;
+			        ret += (20.0 * Math.sin(x * this.PI) + 40.0 * Math.sin(x / 3.0 * this.PI)) * 2.0 / 3.0;
+			        ret += (150.0 * Math.sin(x / 12.0 * this.PI) + 300.0 * Math.sin(x / 30.0 * this.PI)) * 2.0 / 3.0;
+			        return ret;
+			    }
+			};
+		
+		
+	</script>
+</body>
+</html>
